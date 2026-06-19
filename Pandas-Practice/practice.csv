@@ -1,6 +1,0 @@
-,Unnamed: 0.3,Unnamed: 0.2,Unnamed: 0.1,Unnamed: 0,train_no,train_name,source_station,destination_station,departure_time,arrival_time,distance_km,avg_speed_kmph
-0,0,0,0,0,12951,Mumbai Rajdhani Express,Mumbai Central,New Delhi,16:00,08:35,1384,50
-1,1,1,1,1,12002,Shatabdi Express,New Delhi,Lucknow,06:10,12:25,512,85
-2,2,2,2,2,22975,Jaipur Superfast Express,Jaipur,Mumbai Bandra,14:20,11:40,1160,75
-3,3,3,3,3,15645,Guwahati Express,Guwahati,Kolkata,18:30,07:15,1030,70
-4,4,4,4,4,19019,Dehradun Express,Dehradun,Delhi Sarai Rohilla,22:15,05:40,305,65
