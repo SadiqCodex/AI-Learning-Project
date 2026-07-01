@@ -1,13 +1,17 @@
 from dotenv import load_dotenv
+import os
+
 load_dotenv()
 
-from langchain_mistralai import ChatMistralAI
+from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnableParallel,RunnableLambda
 
 # Components
-model = ChatMistralAI(model="mistral-small-2506")
+ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+ollama_model = os.getenv("OLLAMA_CHAT_MODEL", "phi3:latest")
+model = ChatOllama(model=ollama_model, base_url=ollama_base_url, temperature=0)
 parser = StrOutputParser()
 
 # Two different prompts

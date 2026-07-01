@@ -4,7 +4,7 @@ import requests
 
 load_dotenv()
 
-from langchain_mistralai import ChatMistralAI
+from langchain_ollama import ChatOllama
 from langchain.tools import tool
 from langchain_core.messages import HumanMessage, ToolMessage
 from tavily import TavilyClient
@@ -72,7 +72,9 @@ def get_news(city: str) -> str:
 # 🧠 LLM Setup
 # =========================
 
-llm = ChatMistralAI(model="mistral-small-2506")
+ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+ollama_model = os.getenv("OLLAMA_CHAT_MODEL", "phi3:latest")
+llm = ChatOllama(model=ollama_model, base_url=ollama_base_url, temperature=0)
 
 
 @wrap_tool_call

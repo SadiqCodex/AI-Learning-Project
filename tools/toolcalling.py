@@ -1,6 +1,8 @@
 from dotenv import load_dotenv
+import os
+
 load_dotenv()
-from langchain_mistralai import ChatMistralAI
+from langchain_ollama import ChatOllama
 from langchain.tools import tool 
 from langchain_core.messages import HumanMessage
 from rich import print 
@@ -15,7 +17,9 @@ def get_text_length(text: str) -> int:
 tools = {
     "get_text_length" : get_text_length
 }
-llm = ChatMistralAI(model = "mistral-small-2506")
+ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+ollama_model = os.getenv("OLLAMA_CHAT_MODEL", "phi3:latest")
+llm = ChatOllama(model=ollama_model, base_url=ollama_base_url, temperature=0)
 
 #tool binding 
 llm_with_tool = llm.bind_tools([get_text_length])
