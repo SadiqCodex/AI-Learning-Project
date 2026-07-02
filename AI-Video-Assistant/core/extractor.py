@@ -1,14 +1,24 @@
-#Actionableitems , decision , questions 
+# Actionableitems , decision , questions
 
-from langchain_mistralai import ChatMistralAI
+import os
+from pathlib import Path
+
+from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough, RunnableLambda
-import os 
+
+base_dir = Path(__file__).resolve().parents[1]
+load_dotenv = __import__("dotenv").dotenv.load_dotenv
+load_dotenv(dotenv_path=base_dir / ".env")
 
 
 def get_llm():
-    return ChatMistralAI(model = "mistral-small-latest", mistral_api_key = os.getenv("MISTRAL_API_KEY"),temperature=0.2)
+    return ChatOllama(
+        model=os.getenv("OLLAMA_MODEL", "phi3"),
+        base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
+        temperature=float(os.getenv("OLLAMA_TEMPERATURE", "0.2")),
+    )
 
 
 
