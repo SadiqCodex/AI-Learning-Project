@@ -25,3 +25,10 @@ pandas
 numpy
 streamlit
 tqdm
+tavily-python>=0.3.0
+aiohttp>=3.9.0
+rich>=13.7.0
+tenacity>=8.2.0
+orjson>=3.9.0
+pydantic>=2.5.0
+html5lib>=1.1
