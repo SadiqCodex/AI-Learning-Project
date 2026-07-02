@@ -1,14 +1,27 @@
+import os
+from pathlib import Path
+
 from langchain.agents import create_agent
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from tools import web_search , scrape_url 
+from tools import web_search, scrape_url
 from dotenv import load_dotenv
 
-load_dotenv()
+base_dir = Path(__file__).resolve().parent.parent
+load_dotenv(dotenv_path=base_dir / ".env")
+load_dotenv(dotenv_path=Path(__file__).resolve().parent / ".env")
 
-#model setup 
-llm = ChatOpenAI(model = "gpt-4o-mini",temperature=0)
+# model setup
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "phi3")
+OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+OLLAMA_TEMPERATURE = float(os.getenv("OLLAMA_TEMPERATURE", "0"))
+
+llm = ChatOllama(
+    model=OLLAMA_MODEL,
+    base_url=OLLAMA_BASE_URL,
+    temperature=OLLAMA_TEMPERATURE,
+)
 
 
 #1st agent 
